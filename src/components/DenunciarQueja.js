@@ -14,14 +14,24 @@ class DenunciarQueja extends React.Component {
       title: 'Denunciar Queja',
     };
 
+    constructor(props) {
+      super(props);
+      this.state = {
+        Estado: "Selecciona el estado"
+      };
+    }  
+
     render() {
       return (
         <View>
           <View style={styles.picker}>
             <Picker 
             mode="dropdown"
+
+
             >
-             <Picker.Item label="Selecciona el estado" value="" />
+
+            <Picker.Item label={this.state.Estado} value="ags" />
             <Picker.Item label="Aguascalientes" value="ags" />
             <Picker.Item label="Baja California" value="bc" />
             <Picker.Item label="Baja California Sur" value="bcs" />
