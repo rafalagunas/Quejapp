@@ -15,8 +15,8 @@ import {
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
-import VerDenuncias from './VerDenuncias';
-import DenunciarQueja from './DenunciarQueja';
+import VerDenuncias from './components/VerDenuncias';
+import DenunciarQueja from './components/DenunciarQueja';
 
 class Main extends Component {
     static navigationOptions = {
