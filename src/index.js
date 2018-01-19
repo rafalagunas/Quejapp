@@ -16,7 +16,7 @@ import {
 import { StackNavigator } from 'react-navigation';
 
 import VerDenuncias from './VerDenuncias';
-
+import DenunciarQueja from './DenunciarQueja';
 
 class Main extends Component {
     static navigationOptions = {
@@ -34,14 +34,14 @@ class Main extends Component {
         </View>
         
          <TouchableOpacity
-          onPress={() => navigate('Second')}
+          onPress={() => navigate('Buscar')}
           style={styles.buscar}
          >
             <Text>Ver denuncias</Text>
         </TouchableOpacity>
         
         <TouchableOpacity
-          onPress={() => navigate('Second')}
+          onPress={() => navigate('Denunciar')}
           style={styles.denunciar}
          >
             <Text>Denunciar queja</Text>
@@ -53,7 +53,8 @@ class Main extends Component {
     
     const App = StackNavigator({
         Home: { screen: Main },
-        Second: {screen: VerDenuncias},
+        Buscar: { screen: VerDenuncias },
+        Denunciar: { screen: DenunciarQueja } 
       });
   
   

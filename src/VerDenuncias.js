@@ -10,7 +10,7 @@ import { StackNavigator } from 'react-navigation';
 
 class VerDenuncias extends React.Component {
     static navigationOptions = {
-      title: 'Chat with Lucy',
+      title: 'Ver Denuncias',
     };
     render() {
       return (
