@@ -17,6 +17,7 @@ class DenunciarQueja extends React.Component {
     render() {
       return (
         <View>
+          <View style={styles.picker}>
             <Picker 
             mode="dropdown"
             >
@@ -53,13 +54,38 @@ class DenunciarQueja extends React.Component {
                 <Picker.Item label="Yucatán" value="yuc" />
                 <Picker.Item label="Zacatecas" value="zac" />
             </Picker>
+            </View>
+
+            <View style={styles.picker}>
+            <Picker 
+            mode="dropdown"
+            >
+              <Picker.Item label="Seleccionar dependencia" value="" />
+              <Picker.Item label="Seguridad Pública" value="sp" />
+              <Picker.Item label="SEGOB" value="segob" />
+              <Picker.Item label="SRE" value="sre" />
+              <Picker.Item label="SHCP" value="shcp" />
+              <Picker.Item label="SEMARNAT" value="semarnat" />
+              <Picker.Item label="SEP" value="sep" />
+              <Picker.Item label="SALUD" value="sal" />
+              <Picker.Item label="CULTURA" value="cul" />
+              <Picker.Item label="PGR" value="pgr" />
+              <Picker.Item label="CJEF" value="cjef" />
+              <Picker.Item label="SECTUR" value="sectur" />
+              <Picker.Item label="STPS" value="stps" />
+        
+            </Picker>
+            </View>
         </View>
       );
     }
   }
 
 const styles = StyleSheet.create({
-
+  picker:{
+    borderBottomColor: 'black',
+    borderBottomWidth: 1,
+  }
     });
 
 
