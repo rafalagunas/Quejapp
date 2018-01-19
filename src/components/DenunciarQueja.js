@@ -27,9 +27,11 @@ class DenunciarQueja extends React.Component {
           <View style={styles.picker}>
             <Picker 
             mode="dropdown"
-
-
             >
+            
+            if(this.state.Estado != "Selecciona el estado"){
+              this.state.Estado = "Estado no seleccionado"
+            }
 
             <Picker.Item label={this.state.Estado} value="ags" />
             <Picker.Item label="Aguascalientes" value="ags" />
