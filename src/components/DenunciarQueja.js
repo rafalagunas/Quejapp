@@ -11,7 +11,8 @@ import {
   TextInput
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-
+import axios from 'axios';
+import App from '../index';
 
 class DenunciarQueja extends React.Component {
     static navigationOptions = {
@@ -42,7 +43,7 @@ class DenunciarQueja extends React.Component {
     }
     
 
-    Send = () => {    
+    Send () {    
 
       let details = {
         'form': 'quejapp',
@@ -72,17 +73,24 @@ class DenunciarQueja extends React.Component {
         body: formBody
     })
     
-    /*.then((response) => alert(response.json()))
+    .then((response) => Alert.alert( 'Gracias','Tu queja ha sido publicada'))
         .then((responseData) => {
             console.log(responseData);
 
+         
+        })
+        .done()
 
-        })*/
-        .done();
+        
+      
+       
+        
 };   
 
 
     render() {
+
+      const { navigate } = this.props.navigation;
       return (
         <ScrollView>
           <View style={styles.picker}>
@@ -192,7 +200,7 @@ class DenunciarQueja extends React.Component {
 
             <TouchableOpacity
             style={styles.botonQueja}
-            onPress={this.Send()}
+            onPress={() => navigate('Home') && this.Send() }
             >
               <Text style={styles.texto}> Publicar queja</Text>
               </TouchableOpacity>
@@ -201,6 +209,9 @@ class DenunciarQueja extends React.Component {
       );
     }
   }
+
+
+
 
 const styles = StyleSheet.create({
   picker:{

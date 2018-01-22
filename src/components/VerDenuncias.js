@@ -6,7 +6,7 @@ import {
   View
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-
+import App from '../index';
 
 class VerDenuncias extends React.Component {
     static navigationOptions = {

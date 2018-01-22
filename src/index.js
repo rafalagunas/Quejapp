@@ -50,15 +50,10 @@ class Main extends Component {
     );
       }
     }
-    
-    const App = StackNavigator({
-        Home: { screen: Main },
-        Buscar: { screen: VerDenuncias },
-        Denunciar: { screen: DenunciarQueja } 
-      });
-  
-  
-export default App;
+
+
+
+export default Main;
   
 
 const styles = StyleSheet.create({
