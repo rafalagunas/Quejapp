@@ -30,7 +30,7 @@ class Main extends Component {
       <View style={styles.container}>
 
         <View style={styles.title}>
-             <Text style={styles.titleText}>Quejapp,{"\n"} visualiza o denuncia quejas públicamente por dependencia pública. </Text>
+             <Text style={styles.titleText}>Quejapp,{"\n"} visualiza o denuncia quejas públicamente por dependencia gubernamental. </Text>
         </View>
         
          <TouchableOpacity
