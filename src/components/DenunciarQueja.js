@@ -22,13 +22,13 @@ class DenunciarQueja extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        Estado: "Selecciona el estado",
-        Dependencia: "Selecciona la dependencia",
-        Ciudad:'Ciudad',
-        Area_dependencia:'ej. Seguridad pública: tránsito',
-        Nombre:'Tu nombre (Opcional)',
-        Contacto: 'correo o número de contacto (Opcional)',
-        Queja:'Aquí va tu queja',
+        Estado: "",
+        Dependencia: "",
+        Ciudad:'',
+        Area_dependencia:'',
+        Nombre:'',
+        Contacto: '',
+        Queja:'',
         key: ''
       };
     }  
@@ -95,9 +95,9 @@ class DenunciarQueja extends React.Component {
             onValueChange={this.SelectState}
             >  
             <Picker.Item label="Seleccionar Estado" value="" />
-            <Picker.Item label="Aguascalientes" value="ags" />
-            <Picker.Item label="Baja California" value="bc" />
-            <Picker.Item label="Baja California Sur" value="bcs" />
+            <Picker.Item label="Aguascalientes" value="Aguascalientes" />
+            <Picker.Item label="Baja California" value="Baja California" />
+            <Picker.Item label="Baja California Sur" value="Baja California Sur" />
             <Picker.Item label="Campeche" value="camp" />
             <Picker.Item label="Chiapas" value="chis" />
                 <Picker.Item label="Chihuahua" value="ch  ih" />
@@ -132,9 +132,9 @@ class DenunciarQueja extends React.Component {
 
             <TextInput
             style={styles.inputs}
-            onFocus= {() => this.setState({Ciudad : ''})}
+            placeholder="Ciudad"
             onChangeText={(text) => this.setState({Ciudad: text})}
-            value={this.state.Ciudad}
+
           />
             <View style={styles.picker}>
             <Picker 
@@ -162,32 +162,29 @@ class DenunciarQueja extends React.Component {
 
          <TextInput
             style={styles.inputs}
-            onFocus= {() => this.setState({Area_dependencia : ''})}
+           placeholder="ej. Seguridad pública: tránsito"
             onChangeText={(text) => this.setState({Area_dependencia: text})}
-            value={this.state.Area_dependencia}
           />
 
 
           <TextInput
             style={styles.inputs}
-            onFocus= {() => this.setState({Nombre : ''})}
             onChangeText={(text) => this.setState({Nombre: text})}
-            value={this.state.Nombre}
+            placeholder="Tu nombre (Opcional)"
           />
           
           
           <TextInput
             style={styles.inputs}
-            onFocus= {() => this.setState({Contacto : ''})}
             onChangeText={(text) => this.setState({Contacto: text})}
-            value={this.state.Contacto}
+            placeholder="correo o número de contacto (Opcional)"
           />
 
           <TextInput
           style={styles.inputs}
           onChangeText={(text) => this.setState({Queja: text})}
           multiline={true}
-          value={this.state.Queja}
+          placeholder="Aquí va tu queja"
           >
 
           </TextInput>  
