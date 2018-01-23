@@ -28,7 +28,8 @@ class DenunciarQueja extends React.Component {
         Area_dependencia:'ej. Seguridad pública: tránsito',
         Nombre:'Tu nombre (Opcional)',
         Contacto: 'correo o número de contacto (Opcional)',
-        Queja:'Aquí va tu queja'
+        Queja:'Aquí va tu queja',
+        key: ''
       };
     }  
 
@@ -42,8 +43,9 @@ class DenunciarQueja extends React.Component {
       this.setState({ Dependencia : dependencia});
     }
     
-
-    Send () {    
+    
+  
+    Send() {    
 
       let details = {
         'form': 'quejapp',
@@ -72,28 +74,21 @@ class DenunciarQueja extends React.Component {
         },
         body: formBody
     })
+    .then(response => { return response.text();})
+    .then(responseData => {console.log(responseData); return responseData;})
+    .then(data => { if(data != '' && data != undefined & data != null){Alert.alert('Éxito.',"Por seguridad, te asignamos un número de queja único con el cual podrás editar tu queja en cualquier momento. \n\n Tu número de queja es: \n" + data)}})
     
-    .then((response) => Alert.alert( 'Gracias','Tu queja ha sido publicada'))
-        .then((responseData) => {
-            console.log(responseData);
-
-         
-        })
-        .done()
-
-        
-      
-       
-        
+   
 };   
 
 
     render() {
-
       const { navigate } = this.props.navigation;
+      
       return (
         <ScrollView>
           <View style={styles.picker}>
+          
             <Picker 
             mode="dropdown"
             selectedValue={this.state.Estado}
@@ -202,6 +197,7 @@ class DenunciarQueja extends React.Component {
             style={styles.botonQueja}
             onPress={() => navigate('Home') && this.Send() }
             >
+           
               <Text style={styles.texto}> Publicar queja</Text>
               </TouchableOpacity>
 
