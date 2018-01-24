@@ -13,7 +13,7 @@ import { StackNavigator } from 'react-navigation';
 import App from '../index';
 
  
-class VerDenuncias extends Component {
+class ResultadoBusqueda extends Component {
   static navigationOptions = {
     title: 'Todas las denuncias',
   };
@@ -33,13 +33,15 @@ Alert.alert("",queja_queja);
  
 componentDidMount() {
  
-  return fetch('http://quejapp.warecrafty.com/data')
-    .then((response) => response.json())
-    .then((responseJson) => {
+    const {state} = this.props.navigation;
+    var datos = state.params ? state.params.datos : "<undefined>";
+
+  return datos
+   .then((returned) => {
       let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
       this.setState({
         isLoading: false,
-        dataSource: ds.cloneWithRows(responseJson),
+        dataSource: ds.cloneWithRows(returned),
       }, function() {
       });
     })
@@ -147,4 +149,4 @@ textViewContainer: {
 
 
 
-export default VerDenuncias;
+export default ResultadoBusqueda;

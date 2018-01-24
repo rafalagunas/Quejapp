@@ -34,11 +34,20 @@ class Main extends Component {
         </View>
         
          <TouchableOpacity
-          onPress={() => navigate('Buscar')}
-          style={styles.buscar}
+          onPress={() => navigate('Generales')}
+          style={styles.generales}
          >
-            <Text>Ver denuncias</Text>
+            <Text>Ver todas las denuncias</Text>
         </TouchableOpacity>
+
+        
+        <TouchableOpacity
+          onPress={() => navigate('Buscar')}
+          style={styles.denunciar}
+         >
+            <Text>Buscar denuncias</Text>
+        </TouchableOpacity>
+      
         
         <TouchableOpacity
           onPress={() => navigate('Denunciar')}
@@ -72,7 +81,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
-  buscar: {
+  generales: {
     alignItems: 'center',
     alignSelf: 'center',
     justifyContent: 'center',

@@ -14,9 +14,10 @@ import { StackNavigator } from 'react-navigation';
 import axios from 'axios';
 import App from '../index';
 
-class DenunciarQueja extends React.Component {
+class BuscarDenuncias extends React.Component {
     static navigationOptions = {
-      title: 'Denunciar Queja',
+      title: 'Buscar queja ciudadana',
+      buttonPrss: false
     };
 
     constructor(props) {
@@ -45,19 +46,18 @@ class DenunciarQueja extends React.Component {
     
     
   
-    Send() {    
+    Send(e) {    
 
+ 
       let details = {
         'form': 'quejapp',
-        'op': 'add',
-        'queja_estado': this.state.Estado,
-        'queja_ciudad': this.state.Ciudad,
+        'op': 'get',
+       'queja_estado': this.state.Estado,
+        'queja_ciudad': '',
         'queja_dependencia': this.state.Dependencia,
-        'queja_area': this.state.Area_dependencia,
-        'queja_nombre': this.state.Nombre,
-        'queja_contacto': this.state.Contacto,
-        'queja_queja': this.state.Queja
+      
     };
+
 
     let formBody = [];
     for (let property in details) {
@@ -67,6 +67,9 @@ class DenunciarQueja extends React.Component {
     }
     formBody = formBody.join("&");
 
+    
+
+
     fetch('http://quejapp.warecrafty.com/API', {
         method: 'POST',
         headers: {
@@ -74,11 +77,12 @@ class DenunciarQueja extends React.Component {
         },
         body: formBody
     })
-    .then(response => { return response.text();})
-   .then(responseData => {console.log(responseData); return responseData;})
-   .then(data => { if(data != '' && data != undefined & data != null){Alert.alert('Éxito.',"Por seguridad, te asignamos un número de queja único con el cual podrás editar tu queja en cualquier momento. \n\n Tu número de queja es: \n" + data)}})
-    
-   
+    .then((response) => response.json())
+    .then(responseJson => {return responseJson})
+    .then(data => {console.log(data) })
+  //  .then(responseJson => {console.log(responseJson);})
+    //.then(data => { if(data != '' && data != undefined & data != null){() => navigate('Resultado', {datos:data}) }})
+
 };   
 
 
@@ -86,7 +90,7 @@ class DenunciarQueja extends React.Component {
       const { navigate } = this.props.navigation;
       
       return (
-        <ScrollView style={styles.container}>
+        <ScrollView>
           <View style={styles.picker}>
           
             <Picker 
@@ -130,12 +134,6 @@ class DenunciarQueja extends React.Component {
             
             </View>
 
-            <TextInput
-            style={styles.inputs}
-            placeholder="Ciudad"
-            onChangeText={(text) => this.setState({Ciudad: text})}
-
-          />
             <View style={styles.picker}>
             <Picker 
             selectedValue={this.state.Dependencia}
@@ -159,42 +157,12 @@ class DenunciarQueja extends React.Component {
           
         
 
-         <TextInput
-            style={styles.inputs}
-           placeholder="ej. Seguridad pública: tránsito"
-            onChangeText={(text) => this.setState({Area_dependencia: text})}
-          />
-
-
-          <TextInput
-            style={styles.inputs}
-            onChangeText={(text) => this.setState({Nombre: text})}
-            placeholder="Tu nombre (Opcional)"
-          />
-          
-          
-          <TextInput
-            style={styles.inputs}
-            onChangeText={(text) => this.setState({Contacto: text})}
-            placeholder="correo o número de contacto (Opcional)"
-          />
-
-          <TextInput
-          style={styles.inputs}
-          onChangeText={(text) => this.setState({Queja: text})}
-          multiline={true}
-          placeholder="Aquí va tu queja"
-          >
-
-          </TextInput>  
-          
-
             <TouchableOpacity
-            style={styles.botonQueja}
-            onPress={() => navigate('Home') && this.Send() }
+            style={styles.botonBuscar}
+            onPress={e => this.Send(e) }
             >
            
-              <Text style={styles.texto}> Publicar queja</Text>
+              <Text style={styles.texto}> Buscar denuncias</Text>
               </TouchableOpacity>
 
         </ScrollView>
@@ -206,32 +174,18 @@ class DenunciarQueja extends React.Component {
 
 
 const styles = StyleSheet.create({
-  container:{
-    flex:1
-  },
-
   picker:{
     borderColor: 'black',
     borderWidth: 1,
     width:280,
     alignSelf:'center'
   },
-  inputs:{
-    height: 100, 
-    borderColor: 'black', 
-    borderWidth: 0,
-    alignSelf:'center',
-    justifyContent:'center',
-    width: 280,
-    height:70
-  },
 
-  botonQueja:{
+  botonBuscar:{
     width: 300,
-    height: 50,
-    borderRadius: 25,
-    marginTop:15,
-    
+    height: 80,
+    borderRadius: 20,
+    marginTop:20,
     justifyContent:'center',
     alignSelf: 'center',
     backgroundColor: '#a8a8a8'
@@ -243,4 +197,4 @@ const styles = StyleSheet.create({
     });
 
 
-export default DenunciarQueja;
+export default BuscarDenuncias;
