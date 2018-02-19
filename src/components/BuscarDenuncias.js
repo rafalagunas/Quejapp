@@ -7,12 +7,18 @@ import {
   Picker,
   View,
   Alert,
+  Dimensions,
   TouchableOpacity, 
   TextInput
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import axios from 'axios';
 import App from '../index';
+
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import { search_response } from '../Actions/Search';
+import reducer from '../reducers/BusquedaReducer';
 
 class BuscarDenuncias extends React.Component {
     static navigationOptions = {
@@ -27,11 +33,9 @@ class BuscarDenuncias extends React.Component {
         Dependencia: "",
         Ciudad:'',
         Area_dependencia:'',
-        Nombre:'',
-        Contacto: '',
-        Queja:'',
-        key: ''
+        data:''
       };
+      this.fillData = this.fillData.bind(this);
     }  
 
 
@@ -44,20 +48,26 @@ class BuscarDenuncias extends React.Component {
       this.setState({ Dependencia : dependencia});
     }
     
-    
+    fillData = (datos) => {
+      this.props.fillData(datos)
+    }
   
-    Send(e) {    
+    setStateAsync(state) {
+      return new Promise((resolve) => {
+        this.setState(state, resolve)
+      });
+    }
 
- 
+
+  Send(e) {    
+
       let details = {
         'form': 'quejapp',
         'op': 'get',
        'queja_estado': this.state.Estado,
         'queja_ciudad': '',
         'queja_dependencia': this.state.Dependencia,
-      
     };
-
 
     let formBody = [];
     for (let property in details) {
@@ -67,30 +77,35 @@ class BuscarDenuncias extends React.Component {
     }
     formBody = formBody.join("&");
 
-    
-
-
-    fetch('http://quejapp.warecrafty.com/API', {
+     fetch('http://quejapp.warecrafty.com/API', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
         body: formBody
     })
-    .then((response) => response.json())
-    .then(responseJson => {return responseJson})
-    .then(data => {console.log(data) })
-  //  .then(responseJson => {console.log(responseJson);})
-    //.then(data => { if(data != '' && data != undefined & data != null){() => navigate('Resultado', {datos:data}) }})
 
+    
+    .then((response) => response.json())
+    .then(responseJson => this.setState({data: responseJson}))
+    //.then(data => { if(data != '' && data != undefined & data != null){this.fillData(data)}})
+    
+
+     
 };   
 
 
     render() {
       const { navigate } = this.props.navigation;
       
+      if(this.state.data != ''){
+        this.fillData(this.state.data)
+        navigate('Resultado')
+      }
+
       return (
-        <ScrollView>
+        <ScrollView style={{backgroundColor:"#FFF"}}>
+          <View style={styles.pickers_container}>
           <View style={styles.picker}>
           
             <Picker 
@@ -154,12 +169,12 @@ class BuscarDenuncias extends React.Component {
               <Picker.Item label="STPS" value="stps" />
             </Picker>
             </View>
-          
+          </View>
         
 
             <TouchableOpacity
             style={styles.botonBuscar}
-            onPress={e => this.Send(e) }
+            onPress={e => this.Send(e)  }
             >
            
               <Text style={styles.texto}> Buscar denuncias</Text>
@@ -170,31 +185,51 @@ class BuscarDenuncias extends React.Component {
     }
   }
 
+  const mapDispatchToProps = (dispatch) => {
+    return {
+        fillData: (data) => { dispatch(search_response(data)); }
+    }
+}
+ 
+const mapStateToProps = state => {
+  //console.log(state)
+  return {  
+      data: state.data,    
+  }
+}
 
-
+const window = Dimensions.get("window");
 
 const styles = StyleSheet.create({
+  pickers_container:{
+    justifyContent:'center',
+    marginTop: window.height * .2
+  },
   picker:{
     borderColor: 'black',
     borderWidth: 1,
     width:280,
-    alignSelf:'center'
+    alignSelf:'center',
   },
 
   botonBuscar:{
     width: 300,
     height: 80,
-    borderRadius: 20,
+    borderRadius: 80,
     marginTop:20,
     justifyContent:'center',
     alignSelf: 'center',
-    backgroundColor: '#a8a8a8'
+    backgroundColor: '#FFF',
+    borderWidth: 4,
+    borderColor:'#425d8b'
   },
 
   texto:{
     alignSelf: 'center',
+    color:'#000',
+    fontWeight:'bold',
+    fontSize:18
   }
     });
 
-
-export default BuscarDenuncias;
+    export default connect(mapStateToProps,mapDispatchToProps)(BuscarDenuncias);

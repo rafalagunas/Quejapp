@@ -234,11 +234,12 @@ const styles = StyleSheet.create({
     
     justifyContent:'center',
     alignSelf: 'center',
-    backgroundColor: '#a8a8a8'
+    backgroundColor: '#425d8b'
   },
 
   texto:{
     alignSelf: 'center',
+    color:'#FFF'
   }
     });
 

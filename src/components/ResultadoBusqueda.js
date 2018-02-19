@@ -12,15 +12,20 @@ import {
 import { StackNavigator } from 'react-navigation';
 import App from '../index';
 
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import { search_response } from '../Actions/Search';
+import reducer from '../reducers/BusquedaReducer';
  
 class ResultadoBusqueda extends Component {
   static navigationOptions = {
-    title: 'Todas las denuncias',
+    title: 'Busqueda',
   };
 constructor(props) {
   super(props);
   this.state = {
-    isLoading: true
+    isLoading: true,
+    data:''
   }
 }
  
@@ -32,16 +37,28 @@ Alert.alert("",queja_queja);
  
  
 componentDidMount() {
- 
-    const {state} = this.props.navigation;
-    var datos = state.params ? state.params.datos : "<undefined>";
+console.log(this.props)
 
-  return datos
-   .then((returned) => {
+if (this.props.data != null && this.props.data != undefined){
+  let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+  this.setState({
+    isLoading: false,
+    dataSource: ds.cloneWithRows(this.props.data),
+  }, function() {
+  });
+}
+}
+
+/*
+
+componentDidMount() {
+  return fetch('http://quejapp.warecrafty.com/data')
+    .then((response) => response.json())
+    .then((responseJson) => {
       let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
       this.setState({
         isLoading: false,
-        dataSource: ds.cloneWithRows(returned),
+        dataSource: ds.cloneWithRows(responseJson),
       }, function() {
       });
     })
@@ -49,7 +66,8 @@ componentDidMount() {
       console.error(error);
     });
 }
- 
+*/
+
 ListViewItemSeparator = () => {
   return (
     <View
@@ -117,11 +135,23 @@ render() {
   );
 }
 }
+
+
+
+const mapStateToProps = state => {
+  console.log(state)
+  return {  
+      data: state.busqueda.data,    
+  }
+}
+
+
+
  
 const styles = StyleSheet.create({
  
 contenedor_queja: {
- backgroundColor: '#b0713e',
+ backgroundColor: '#425d8b',
  borderRadius:20
 },
 
@@ -148,5 +178,4 @@ textViewContainer: {
 });
 
 
-
-export default ResultadoBusqueda;
+export default connect(mapStateToProps)(ResultadoBusqueda);

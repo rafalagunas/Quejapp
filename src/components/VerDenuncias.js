@@ -119,8 +119,9 @@ render() {
 const styles = StyleSheet.create({
  
 contenedor_queja: {
- backgroundColor: '#b0713e',
- borderRadius:20
+ backgroundColor: '#425d8b',
+ borderRadius:13,
+ height:195
 },
 
 MainContainer :{
@@ -130,16 +131,15 @@ justifyContent: 'center',
 flex:1,
 paddingTop: (Platform.OS === 'ios') ? 20 : 0,
 backgroundColor: '#fff',
-padding: 5,
- 
+padding: 5, 
 },
  
 textViewContainer: {
  
  textAlign:'left', 
- padding:5,
- fontSize: 15,
- color: '#000',
+ padding:2,
+ fontSize: 14,
+ color: '#FFF',
  
 }
  
