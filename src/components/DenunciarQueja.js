@@ -142,18 +142,18 @@ class DenunciarQueja extends React.Component {
             onValueChange={this.SelectDependence}
             >
               <Picker.Item label="Seleccionar dependencia" value="" />
-              <Picker.Item label="Seguridad Pública" value="sp" />
-              <Picker.Item label="SEGOB" value="segob" />
-              <Picker.Item label="SRE" value="sre" />
-              <Picker.Item label="SHCP" value="shcp" />
-              <Picker.Item label="SEMARNAT" value="semarnat" />
-              <Picker.Item label="SEP" value="sep" />
-              <Picker.Item label="SALUD" value="sal" />
-              <Picker.Item label="CULTURA" value="cul" />
-              <Picker.Item label="PGR" value="pgr" />
-              <Picker.Item label="CJEF" value="cjef" />
-              <Picker.Item label="SECTUR" value="sectur" />
-              <Picker.Item label="STPS" value="stps" />
+              <Picker.Item label="Seguridad Pública" value="Seguridad Pública" />
+              <Picker.Item label="Secretaría de Gobierno" value="Secretaría de Gobierno" />
+              <Picker.Item label="Secretaría de Relaciones Exteriores" value="Secretaría de Relaciones Exteriores" />
+              <Picker.Item label="ecretaría de Hacienda y Crédito Público" value="Secretaría de Hacienda y Crédito Público" />
+              <Picker.Item label="Secretaría de Medio Ambiente y Recursos Naturales" value="Secretaría de Medio Ambiente y Recursos Naturales" />
+              <Picker.Item label="Secretaría de Educación Pública" value="Secretaría de Educación Pública" />
+              <Picker.Item label="Secretaría de Salud" value="Secretaría de Salud" />
+              <Picker.Item label="Secretaría de Cultura" value="Secretaría de Cultura" />
+              <Picker.Item label="Procuraduría General de la República" value="Procuraduría General de la República" />
+              <Picker.Item label="Consejería Jurídica del Ejecutivo Federal" value="Consejería Jurídica del Ejecutivo Federal" />
+              <Picker.Item label="Secretaría de Turismo" value="Secretaría de Turismo" />
+              <Picker.Item label="Secretaría del Trabajo y Previsión Social" value="Secretaría del Trabajo y Previsión Social" />
             </Picker>
             </View>
           
@@ -207,7 +207,8 @@ class DenunciarQueja extends React.Component {
 
 const styles = StyleSheet.create({
   container:{
-    flex:1
+    flex:1,
+    backgroundColor:'#FFF'
   },
 
   picker:{
@@ -217,7 +218,7 @@ const styles = StyleSheet.create({
     alignSelf:'center'
   },
   inputs:{
-    height: 100, 
+    height: 100,  
     borderColor: 'black', 
     borderWidth: 0,
     alignSelf:'center',

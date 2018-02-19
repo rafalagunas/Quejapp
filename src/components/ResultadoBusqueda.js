@@ -122,7 +122,7 @@ render() {
 
          <Text style={styles.textViewContainer} >{'Contacto: ' + rowData.queja_contacto}</Text>
 
-         <Text style={styles.textViewContainer} >{'Queja: ' + rowData.queja_queja}</Text>
+         <Text style={styles.textViewContainer_queja} >{'Queja: ' + rowData.queja_queja}</Text>
  
          </TouchableOpacity>  
  
@@ -150,10 +150,14 @@ const mapStateToProps = state => {
  
 const styles = StyleSheet.create({
  
-contenedor_queja: {
- backgroundColor: '#425d8b',
- borderRadius:20
-},
+  contenedor_queja: {
+    backgroundColor: '#FFF',
+    borderRadius:13,
+    height:210,
+    borderWidth:4,
+    borderColor:'#425d8b'
+   },
+   
 
 MainContainer :{
  
@@ -168,12 +172,24 @@ padding: 5,
  
 textViewContainer: {
  
- textAlign:'left', 
- padding:5,
- fontSize: 15,
- color: '#000',
+  textAlign:'left', 
+  padding:1,
+  fontSize: 15,
+  color: '#000',
+  fontWeight:'bold'
+  
+ },
  
-}
+ textViewContainer_queja: {
+  
+   textAlign:'left', 
+   padding:1,
+   fontSize: 15,
+   color: '#d60404',
+   fontWeight:'bold'
+   
+  }
+  
  
 });
 
