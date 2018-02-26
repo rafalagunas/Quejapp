@@ -152,7 +152,7 @@ textViewContainer_queja: {
   padding:1,
   fontSize: 15,
   color: '#d60404',
-  fontWeight:'bold'
+  fontWeight:'bold',
   
  }
  
