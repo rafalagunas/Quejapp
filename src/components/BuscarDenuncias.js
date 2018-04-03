@@ -108,6 +108,7 @@ class BuscarDenuncias extends React.Component {
           <View style={styles.pickers_container}>
           <View style={styles.picker}>
           
+          
             <Picker 
             
             selectedValue={this.state.Estado}
@@ -158,7 +159,7 @@ class BuscarDenuncias extends React.Component {
               <Picker.Item label="Seguridad Pública" value="Seguridad Pública" />
               <Picker.Item label="Secretaría de Gobierno" value="Secretaría de Gobierno" />
               <Picker.Item label="Secretaría de Relaciones Exteriores" value="Secretaría de Relaciones Exteriores" />
-              <Picker.Item label="ecretaría de Hacienda y Crédito Público" value="Secretaría de Hacienda y Crédito Público" />
+              <Picker.Item label="Secretaría de Hacienda y Crédito Público" value="Secretaría de Hacienda y Crédito Público" />
               <Picker.Item label="Secretaría de Medio Ambiente y Recursos Naturales" value="Secretaría de Medio Ambiente y Recursos Naturales" />
               <Picker.Item label="Secretaría de Educación Pública" value="Secretaría de Educación Pública" />
               <Picker.Item label="Secretaría de Salud" value="Secretaría de Salud" />
