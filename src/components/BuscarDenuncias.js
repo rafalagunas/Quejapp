@@ -22,7 +22,7 @@ import reducer from '../reducers/BusquedaReducer';
 
 class BuscarDenuncias extends React.Component {
     static navigationOptions = {
-      title: 'Buscar queja ciudadana',
+      title: 'Encuentra denuncias',
       buttonPrss: false
     };
 

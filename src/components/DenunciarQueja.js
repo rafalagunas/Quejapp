@@ -8,7 +8,8 @@ import {
   View,
   Alert,
   TouchableOpacity, 
-  TextInput
+  TextInput,
+  Dimensions
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import axios from 'axios';
@@ -16,7 +17,7 @@ import App from '../index';
 
 class DenunciarQueja extends React.Component {
     static navigationOptions = {
-      title: 'Denunciar Queja',
+      title: 'Haz una denuncia',
     };
 
     constructor(props) {
@@ -145,7 +146,7 @@ class DenunciarQueja extends React.Component {
               <Picker.Item label="Seguridad Pública" value="Seguridad Pública" />
               <Picker.Item label="Secretaría de Gobierno" value="Secretaría de Gobierno" />
               <Picker.Item label="Secretaría de Relaciones Exteriores" value="Secretaría de Relaciones Exteriores" />
-              <Picker.Item label="ecretaría de Hacienda y Crédito Público" value="Secretaría de Hacienda y Crédito Público" />
+              <Picker.Item label="Secretaría de Hacienda y Crédito Público" value="Secretaría de Hacienda y Crédito Público" />
               <Picker.Item label="Secretaría de Medio Ambiente y Recursos Naturales" value="Secretaría de Medio Ambiente y Recursos Naturales" />
               <Picker.Item label="Secretaría de Educación Pública" value="Secretaría de Educación Pública" />
               <Picker.Item label="Secretaría de Salud" value="Secretaría de Salud" />
@@ -161,7 +162,7 @@ class DenunciarQueja extends React.Component {
 
          <TextInput
             style={styles.inputs}
-           placeholder="ej. Seguridad pública: tránsito"
+           placeholder="Ej. Seguridad Pública - Tránsito"
             onChangeText={(text) => this.setState({Area_dependencia: text})}
           />
 
@@ -176,18 +177,25 @@ class DenunciarQueja extends React.Component {
           <TextInput
             style={styles.inputs}
             onChangeText={(text) => this.setState({Contacto: text})}
-            placeholder="correo o número de contacto (Opcional)"
+            placeholder="Correo o número de contacto (Opcional)"
           />
 
           <TextInput
-          style={styles.inputs}
+          style={styles.large_input}
           onChangeText={(text) => this.setState({Queja: text})}
           multiline={true}
-          placeholder="Aquí va tu queja"
+          placeholder="Redacta tu denuncia indicando(en caso de conocer) el nombre del servidor público, el lugar de los hechos y detalles importantes que ayuden a dar seguimiento a tu denuncia."
           >
 
           </TextInput>  
           
+
+          <TouchableOpacity
+            style={styles.botonQueja}
+            >
+              <Text style={styles.texto}> Adjunta evidencias (opcional)</Text>
+              </TouchableOpacity>
+
 
             <TouchableOpacity
             style={styles.botonQueja}
@@ -203,6 +211,7 @@ class DenunciarQueja extends React.Component {
   }
 
 
+  const window = Dimensions.get("window");
 
 
 const styles = StyleSheet.create({
@@ -214,22 +223,29 @@ const styles = StyleSheet.create({
   picker:{
     borderColor: 'black',
     borderWidth: 1,
-    width:280,
+    width:window.width * .7,
     alignSelf:'center'
   },
   inputs:{
-    height: 100,  
     borderColor: 'black', 
     borderWidth: 0,
     alignSelf:'center',
     justifyContent:'center',
-    width: 280,
-    height:70
+    width: window.width * .7,
+  },
+
+  large_input:{
+    borderColor: 'black', 
+    borderWidth: 0,
+    height: window.height * .2,
+    alignSelf:'center',
+    justifyContent:'center',
+    width: window.width * .7,
   },
 
   botonQueja:{
-    width: 300,
-    height: 50,
+    width: window.width * .7,
+    height: window.height * .1,
     borderRadius: 25,
     marginTop:15,
     

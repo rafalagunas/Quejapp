@@ -12,7 +12,8 @@ import {
   Text,
   Button,
   TouchableOpacity,
-  View
+  View,
+  Dimensions
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
@@ -36,7 +37,7 @@ class Main extends Component {
       />
 
         <View style={styles.title}>
-             <Text style={styles.titleText}>{"\n"} Alza la voz con esta aplicación. {"\n"} Publica quejas y denuncias por dependencia gubernamental </Text>
+             <Text style={styles.titleText}>{"\n"} Alza la voz con esta aplicación. {"\n"} Publica quejas y denuncias por dependencia gubernamental  {"\n"} ¡Acabemos con la corrupción!</Text>
         </View>
         
          <TouchableOpacity
@@ -51,7 +52,7 @@ class Main extends Component {
           onPress={() => navigate('Buscar')}
           style={styles.denunciar}
          >
-            <Text style={styles.buttonText}>Buscar denuncias</Text>
+            <Text style={styles.buttonText}>Encuentra denuncias</Text>
         </TouchableOpacity>
       
         
@@ -59,13 +60,21 @@ class Main extends Component {
           onPress={() => navigate('Denunciar')}
           style={styles.denunciar}
          >
-            <Text style={styles.buttonText}>Denunciar queja</Text>
+            <Text style={styles.buttonText}>Haz una denuncia</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+        onPress={() => navigate('Conoce')}
+          style={styles.denunciar}
+         >
+            <Text style={styles.buttonText}>Conoce la corrupción</Text>
         </TouchableOpacity>
       </View>
     );
       }
     }
 
+    const window = Dimensions.get('window');
 
 
 export default Main;
@@ -73,7 +82,8 @@ export default Main;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    width: window.width * 1,
+    height: window.height * 1,
     alignItems: 'center',
     backgroundColor: '#FFF',
   },
@@ -104,9 +114,9 @@ fontSize:18
     alignItems: 'center',
     alignSelf: 'center',
     justifyContent: 'center',
-    width: 300,
-    height:80,
-    marginTop: 40,
+    width: window.width * .7,
+    height:window.width * .2,
+    marginTop: 15,
     borderRadius: 80,
     backgroundColor: "#425d8b"
   },
@@ -114,8 +124,8 @@ fontSize:18
     alignItems: 'center',
     alignSelf: 'center',
     justifyContent: 'center',
-    width: 300,
-    height:80,
+    width: window.width * .7,
+    height:window.width * .2,
     marginTop: 10,
     borderRadius: 80,
     backgroundColor: "#425d8b"
