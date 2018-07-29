@@ -11,14 +11,7 @@ import {
   TouchableOpacity, 
   TextInput
 } from 'react-native';
-import { StackNavigator } from 'react-navigation';
-import axios from 'axios';
-import App from '../index';
 
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import { search_response } from '../Actions/Search';
-import reducer from '../reducers/BusquedaReducer';
 
 class BuscarDenuncias extends React.Component {
     static navigationOptions = {
@@ -233,4 +226,4 @@ const styles = StyleSheet.create({
   }
     });
 
-    export default connect(mapStateToProps,mapDispatchToProps)(BuscarDenuncias);
+    export default BuscarDenuncias;

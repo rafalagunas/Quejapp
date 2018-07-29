@@ -9,13 +9,7 @@ import {
   View,
   ActivityIndicator
 } from 'react-native';
-import { StackNavigator } from 'react-navigation';
-import App from '../index';
 
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import { search_response } from '../Actions/Search';
-import reducer from '../reducers/BusquedaReducer';
  
 class ResultadoBusqueda extends Component {
   static navigationOptions = {
@@ -194,4 +188,4 @@ textViewContainer: {
 });
 
 
-export default connect(mapStateToProps)(ResultadoBusqueda);
+export default ResultadoBusqueda;

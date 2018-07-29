@@ -11,18 +11,10 @@ import {
   TouchableOpacity, 
   TextInput
 } from 'react-native';
-import { StackNavigator } from 'react-navigation';
-import axios from 'axios';
-import App from '../index';
-
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import { search_response } from '../Actions/Search';
-import reducer from '../reducers/BusquedaReducer';
 
 class Conoce extends React.Component {
     static navigationOptions = {
-      title: 'Encuentra denuncias',
+      title: 'Analiza tu caso',
       buttonPrss: false
     };
 
@@ -34,7 +26,9 @@ class Conoce extends React.Component {
         Third:'',
         Fourth:'',
         fifth:'',
-        response: ''
+        response: '',
+        Analyzed: false,
+        
       };
     }  
 
@@ -75,18 +69,33 @@ class Conoce extends React.Component {
 
 
   Analyze(e) {    
-    
+    /*Soborno, Desvío de recursos, Abuso de funciones, Colusión,
+     Conspiración para cometer actos de corrupción, Tráfico de influencia,
+    Enriquecimiento oculto, Obstrucción de la justicia,
+    Uso ilegal de información falsa o confidencial, Nepotismo
+    */
 
      
 };   
 
 
     render() {
+      let Result;
+      if (this.state.Analyzed == false){
+      Result =
+     <TouchableOpacity style={styles.get_type}>
+      <Text style={styles.button_text}> Analiza tu caso </Text>
+        </TouchableOpacity>;
+     
+    }
       return (
         <ScrollView style={{backgroundColor:"#FFF"}}>
           
-          <Text style={{ fontSize: 18, color: "#000"}}> Servidor Público: una persona que presta sus servicios al estado</Text>
-
+          <View style={{paddingTop: 25,justifyContent:'center', alignSelf:'center', width: window.width * .8}}>
+          <Text style={{ fontSize: 18, color: "#000", alignSelf: 'center'}}> 
+            En esta sección, podrás analizar que tipo de acto corruptivo estas presenciando/recibiendo a través de este cuestionario.
+          </Text>
+          </View>
           <View style={styles.pickers_container}>
          
           <View style={styles.picker}>
@@ -158,17 +167,14 @@ class Conoce extends React.Component {
           <Picker.Item label="si" value="si" />
           <Picker.Item label="no" value="no" />
           </Picker>
-          </View>
 
+          </View>
+         
+  {Result}
           </View>
         
 
-            <Text
-            style={styles.Resultado}
-            >
-           
-              <Text style={styles.texto}> Buscar denuncias</Text>
-              </Text>
+   
 
         </ScrollView>
       );
@@ -182,7 +188,23 @@ const window = Dimensions.get("window");
 const styles = StyleSheet.create({
   pickers_container:{
     justifyContent:'center',
-    marginTop: window.height * .1
+    marginTop: window.height * .05
+    , paddingBottom: window.height * .1
+  },
+  button_text:{
+    color: '#FFF',
+    fontSize: 20
+  },
+  get_type:{
+    alignItems: 'center',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    width: window.width * .7,
+    height: window.width * .2,
+    marginTop: 15,
+    borderRadius: 80,
+    backgroundColor: "#425d8b"
+  
   },
   picker:{
     borderColor: 'black',

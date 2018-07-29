@@ -7,7 +7,8 @@ import {
   ListView,
   TouchableOpacity,
   View,
-  ActivityIndicator
+  ActivityIndicator,
+  RefreshControl
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import App from '../index';
@@ -20,16 +21,36 @@ class VerDenuncias extends Component {
 constructor(props) {
   super(props);
   this.state = {
-    isLoading: true
+    isLoading: true,
+    refreshing: false,
   }
 }
- 
-GetItem (queja_queja) {
- 
+
+_onRefresh = () => {
+  this.setState({refreshing: true});
+  this.fetchData().then(() => {
+    this.setState({refreshing: false});
+  });
+}
+GetItem (queja_queja) { 
 Alert.alert("",queja_queja);
- 
 }
  
+fetchData(){
+  return fetch('http://quejapp.warecrafty.com/data')
+  .then((response) => response.json())
+  .then((responseJson) => {
+    let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.setState({
+      isLoading: false,
+      dataSource: ds.cloneWithRows(responseJson),
+    }, function() {
+    });
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+}
  
 componentDidMount() {
  
@@ -80,6 +101,10 @@ render() {
  
         dataSource={this.state.dataSource}
  
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this._onRefresh} />}
         renderSeparator= {this.ListViewItemSeparator}
  
         renderRow={(rowData) =>
