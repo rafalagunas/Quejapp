@@ -8,7 +8,7 @@ import {
   Button,
   TouchableOpacity,
   View,
-  Dimensions
+  Dimensions, ScrollView
 } from 'react-native';
 
 
@@ -22,7 +22,7 @@ class Main extends Component {
     const { navigate } = this.props.navigation;
 
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
 
         <Image
           style={styles.logo}
@@ -69,9 +69,8 @@ class Main extends Component {
         >
           <Text style={styles.buttonText}>Analiza tu caso</Text>
         </TouchableOpacity>
+        </ScrollView>
         
-        
-      </View>
     );
   }
 }
@@ -85,11 +84,11 @@ export default Main;
 
 const styles = StyleSheet.create({
   container: {
-    width: window.width * 1,
-    height: window.height * 1,
-    alignItems: 'center',
+  
+  
     backgroundColor: '#FFF',
   },
+
   buttonText: {
     color: '#FFF',
     fontWeight: 'bold',
@@ -100,6 +99,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     height: 90,
     width: 150,
+    alignSelf:'center'
   },
   title: {
     alignSelf: 'center',
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     alignSelf: 'center',
-    paddingBottom: 20
+    paddingBottom: 30
   },
   generales: {
     alignItems: 'center',
