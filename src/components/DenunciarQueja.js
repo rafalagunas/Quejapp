@@ -190,12 +190,6 @@ class DenunciarQueja extends React.Component {
           </TextInput>  
           
 
-          <TouchableOpacity
-            style={styles.botonQueja}
-            >
-              <Text style={styles.texto}> Adjunta evidencias (opcional)</Text>
-              </TouchableOpacity>
-
 
             <TouchableOpacity
             style={styles.botonQueja}
@@ -210,6 +204,15 @@ class DenunciarQueja extends React.Component {
     }
   }
 
+  /*
+
+          <TouchableOpacity
+            style={styles.botonQueja}
+            >
+              <Text style={styles.texto}> Adjunta evidencias (opcional)</Text>
+              </TouchableOpacity>
+
+              */
 
   const window = Dimensions.get("window");
 

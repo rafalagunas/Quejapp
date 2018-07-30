@@ -21,15 +21,16 @@ class Conoce extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        First: "",
-        Second: "",
+        First:'',
+        Second:'',
         Third:'',
         Fourth:'',
-        fifth:'',
-        response: '',
+        Fifth:'',
+        response:'',
         Analyzed: false,
         
       };
+    
     }  
 
 
@@ -74,8 +75,67 @@ class Conoce extends React.Component {
     Enriquecimiento oculto, Obstrucción de la justicia,
     Uso ilegal de información falsa o confidencial, Nepotismo
     */
+   /*if(this.state.First == '' || this.state.Second == '' || this.state.Third == '' 
+   || this.this.state.Fourth == '' || this.state.Fifth == ''){
+     alert('Debes completar el cuestionario');
+   }*/
 
+   if(this.state.First.length == 0 || this.state.Second.length == 0 || this.state.Third.length == 0 
+   || this.state.Fourth.length == 0 || this.state.Fifth.length == 0){
+     Alert.alert("¡Cuidado!",'Debes completar el cuestionario')
+   }
+   else{
+  
+    if(this.state.Analyzed == false){
+
+      if(this.state.First == true && this.state.Second == true && this.state.Third == true 
+   && this.state.Fourth == true && this.state.Fifth == true){
+       this.setState({Analyzed: true});
+        this.setState({response: "Abuso de poder y obstrucción de la justicia"});
+        
+      } 
      
+      if(this.state.Second == true && this.state.First == true ){
+       this.setState({Analyzed: true});
+        this.setState({response: "Abuso de poder y obstrucción de la justicia"});
+        
+      } 
+      if(this.state.Second == true && this.state.First == true && this.state.Third == true){
+       this.setState({Analyzed: true});
+        this.setState({response: "Abuso de poder y obstrucción de la justicia"});
+        
+      } 
+        if(this.state.Second == true){
+       this.setState({Analyzed: true});
+        this.setState({response: "Abuso de poder"});
+        
+      } 
+
+      if(this.state.Second == true && this.state.First == true || this.state.Fifth == true){
+       this.setState({Analyzed: true});
+        this.setState({response: "Abuso de poder o desvío de recursos"});
+        
+      } 
+      
+      if(this.state.Fifth == true && this.state.First == true){
+       this.setState({Analyzed: true});
+        this.setState({response: "Desvío de Recursos"});
+        
+      } 
+      if(this.state.Fifth == true){
+       this.setState({Analyzed: true});
+        this.setState({response: "Enriquecimiento oculto"});
+        
+      } 
+    }
+
+  else{
+   
+    this.setState({Analyzed: false})
+    
+  }
+}
+
 };   
 
 
@@ -83,11 +143,26 @@ class Conoce extends React.Component {
       let Result;
       if (this.state.Analyzed == false){
       Result =
-     <TouchableOpacity style={styles.get_type}>
+     <TouchableOpacity style={styles.get_type} onPress={(e) => this.Analyze(e)}>
       <Text style={styles.button_text}> Analiza tu caso </Text>
-        </TouchableOpacity>;
-     
+        </TouchableOpacity>;      
     }
+    else{
+
+     Result =(
+       <View>
+     <TouchableOpacity style={styles.get_type} onPress={(e) => this.Analyze(e)}>
+      <Text style={styles.button_text}> Analizar de nuevo </Text>
+     </TouchableOpacity>
+     <View style={styles.Result_View}>
+      <Text style={styles.Result_text}> <Text style={styles.Result_BoldText}> Resultado: {'\n'} </Text>
+       {this.state.response} </Text>
+      </View>
+     </View>
+    );      
+    
+    }
+ 
       return (
         <ScrollView style={{backgroundColor:"#FFF"}}>
           
@@ -107,8 +182,8 @@ class Conoce extends React.Component {
             onValueChange={this.selectFirst}
             >  
             <Picker.Item label="Selecciona la respuesta" value="" />
-            <Picker.Item label="si" value="si" />
-            <Picker.Item label="no" value="no" />
+            <Picker.Item label="si" value={true} />
+            <Picker.Item label="no" value={false} />
             </Picker>
             
             </View>
@@ -122,8 +197,8 @@ class Conoce extends React.Component {
           onValueChange={this.selectSecond}
           >  
           <Picker.Item label="Selecciona la respuesta" value="" />
-          <Picker.Item label="si" value="si" />
-          <Picker.Item label="no" value="no" />
+          <Picker.Item label="si" value={true} />
+          <Picker.Item label="no" value={false} />
           </Picker>
           </View>
 
@@ -137,8 +212,8 @@ class Conoce extends React.Component {
           onValueChange={this.selectThird}
           >  
           <Picker.Item label="Selecciona la respuesta" value="" />
-          <Picker.Item label="si" value="si" />
-          <Picker.Item label="no" value="no" />
+          <Picker.Item label="si" value={true} />
+          <Picker.Item label="no" value={false} />
           </Picker>
           </View>
 
@@ -151,8 +226,8 @@ class Conoce extends React.Component {
           onValueChange={this.selectFourth}
           >  
           <Picker.Item label="Selecciona la respuesta" value="" />
-          <Picker.Item label="si" value="si" />
-          <Picker.Item label="no" value="no" />
+          <Picker.Item label="si" value={true} />
+          <Picker.Item label="no" value={false} />
           </Picker>
           </View>
 
@@ -164,8 +239,8 @@ class Conoce extends React.Component {
           onValueChange={this.selectFifth}
           >  
           <Picker.Item label="Selecciona la respuesta" value="" />
-          <Picker.Item label="si" value="si" />
-          <Picker.Item label="no" value="no" />
+          <Picker.Item label="si" value={true} />
+          <Picker.Item label="no" value={false} />
           </Picker>
 
           </View>
@@ -195,6 +270,28 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontSize: 20
   },
+  Result_View:{
+    paddingTop: 20,
+    paddingBottom: 20,
+    width: 200,
+    borderColor: '#000',
+    borderWidth: 1,
+    borderRadius: 20,
+    alignSelf: 'center',
+    marginTop: 10
+  },
+  Result_Boldtext:{
+    color: '#000',
+    fontWeight: 'bold'
+  },
+
+Result_text:{
+  color: '#000',
+  fontSize: 20,
+  alignSelf:'center',
+  padding: 10,
+
+},
   get_type:{
     alignItems: 'center',
     alignSelf: 'center',

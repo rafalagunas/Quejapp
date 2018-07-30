@@ -6,7 +6,7 @@ import BuscarDenuncias from './components/BuscarDenuncias';
 import ResultadoBusqueda from './components/ResultadoBusqueda';
 import Conoce from './components/Conoce';
 import Glosario from './components/Glosario';
-
+console.disableYellowBox = true;
 const App = StackNavigator({
     Home: { screen: Main },
     Generales: { screen: VerDenuncias },

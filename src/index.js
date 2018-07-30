@@ -45,7 +45,7 @@ class Main extends Component {
           onPress={() => navigate('Buscar')}
           style={styles.denunciar}
         >
-          <Text style={styles.buttonText}>Encuentra denuncias</Text>
+          <Text style={styles.buttonText}>Busca por Estado o Dependencia</Text>
         </TouchableOpacity>
 
 
@@ -93,7 +93,8 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#FFF',
     fontWeight: 'bold',
-    fontSize: 18
+    fontSize: 18,
+    padding: 15
   },
   logo: {
     marginTop: 20,

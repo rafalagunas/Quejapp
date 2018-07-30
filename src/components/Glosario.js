@@ -49,6 +49,10 @@ class Glosario extends React.Component {
           <Text style={styles.simple_text} >
       Se le conoce cuando algún estímulo económico destinado a una obra o inversión pública es usada para algún sector privado o sobornos.
        </Text>
+       <Text style={styles.bold}>Abuso de funciones</Text>
+       <Text style={styles.simple_text} >
+        Cuando algún funcionario en este caso público abusa de su poder para ventanas económicas o personales
+        </Text>
         </View>
          
         </ScrollView>
