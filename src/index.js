@@ -1,9 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from "react";
 import {
   Platform,
@@ -66,6 +60,13 @@ class Main extends Component {
           style={styles.denunciar}
         >
           <Text style={styles.buttonText}>Conoce la corrupción</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => navigate("Analiza")}
+          style={styles.denunciar}
+        >
+          <Text style={styles.buttonText}>Analiza tu caso</Text>
         </TouchableOpacity>
       </View>
     );

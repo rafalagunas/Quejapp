@@ -27,15 +27,15 @@ const respuesta= "p"
 
 class Conoce extends React.Component {
     static navigationOptions = {
-      title: 'Encuentra denuncias',
+      title: 'Analiza tu caso',
       buttonPrss: false
     };
 
     constructor(props) {
       super(props);
       this.state = {
-        First: "",
-        Second: "",
+        First:'',
+        Second:'',
         Third:'',
         Fourth:'',
         Fifth:'',
@@ -94,8 +94,11 @@ class Conoce extends React.Component {
       return (
         <ScrollView style={{backgroundColor:"#FFF"}}>
           
-          <Text style={{ fontSize: 18, color: "#000"}}> Servidor Público: una persona que presta sus servicios al estado</Text>
-
+          <View style={{paddingTop: 25,justifyContent:'center', alignSelf:'center', width: window.width * .8}}>
+          <Text style={{ fontSize: 18, color: "#000", alignSelf: 'center'}}> 
+            En esta sección, podrás analizar que tipo de acto corruptivo estas presenciando/recibiendo a través de este cuestionario.
+          </Text>
+          </View>
           <View style={styles.pickers_container}>
          
           <View style={styles.picker}>
@@ -151,8 +154,8 @@ class Conoce extends React.Component {
           onValueChange={this.selectFourth}
           >  
           <Picker.Item label="Selecciona la respuesta" value="" />
-          <Picker.Item label="si" value="si" />
-          <Picker.Item label="no" value="no" />
+          <Picker.Item label="si" value={true} />
+          <Picker.Item label="no" value={false} />
           </Picker>
           </View>
 
@@ -164,11 +167,13 @@ class Conoce extends React.Component {
           onValueChange={this.selectFifth}
           >  
           <Picker.Item label="Selecciona la respuesta" value="" />
-          <Picker.Item label="si" value="si" />
-          <Picker.Item label="no" value="no" />
+          <Picker.Item label="si" value={true} />
+          <Picker.Item label="no" value={false} />
           </Picker>
-          </View>
 
+          </View>
+         
+  {Result}
           </View>
         
 
@@ -218,7 +223,45 @@ const styles = StyleSheet.create({
     },
   pickers_container:{
     justifyContent:'center',
-    marginTop: window.height * .1
+    marginTop: window.height * .05
+    , paddingBottom: window.height * .1
+  },
+  button_text:{
+    color: '#FFF',
+    fontSize: 20
+  },
+  Result_View:{
+    paddingTop: 20,
+    paddingBottom: 20,
+    width: 200,
+    borderColor: '#000',
+    borderWidth: 1,
+    borderRadius: 20,
+    alignSelf: 'center',
+    marginTop: 10
+  },
+  Result_Boldtext:{
+    color: '#000',
+    fontWeight: 'bold'
+  },
+
+Result_text:{
+  color: '#000',
+  fontSize: 20,
+  alignSelf:'center',
+  padding: 10,
+
+},
+  get_type:{
+    alignItems: 'center',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    width: window.width * .7,
+    height: window.width * .2,
+    marginTop: 15,
+    borderRadius: 80,
+    backgroundColor: "#425d8b"
+  
   },
   picker:{
     borderColor: 'black',
