@@ -19,6 +19,11 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import { search_response } from '../Actions/Search';
 import reducer from '../reducers/BusquedaReducer';
+console.disableYellowBox = true;
+
+
+
+const respuesta= "p"
 
 class Conoce extends React.Component {
     static navigationOptions = {
@@ -33,9 +38,11 @@ class Conoce extends React.Component {
         Second: "",
         Third:'',
         Fourth:'',
-        fifth:'',
-        response: ''
+        Fifth:'',
+        Response: '',
+        
       };
+      this.Analyze = this.Analyze.bind(this)
     }  
 
 
@@ -66,22 +73,24 @@ class Conoce extends React.Component {
     }
     
  
-  
-    setStateAsync(state) {
-      return new Promise((resolve) => {
-        this.setState(state, resolve)
-      });
+
+
+
+    Analyze (su) {
+
+   
+        su = this.respuesta
+        
+        this.setState({
+          Response: su
+        })
+    
+
     }
 
 
-  Analyze(e) {    
-    
-
-     
-};   
-
-
     render() {
+
       return (
         <ScrollView style={{backgroundColor:"#FFF"}}>
           
@@ -98,8 +107,8 @@ class Conoce extends React.Component {
             onValueChange={this.selectFirst}
             >  
             <Picker.Item label="Selecciona la respuesta" value="" />
-            <Picker.Item label="si" value="si" />
-            <Picker.Item label="no" value="no" />
+            <Picker.Item label="Si" value="si" />
+            <Picker.Item label="No" value="no" />
             </Picker>
             
             </View>
@@ -113,8 +122,8 @@ class Conoce extends React.Component {
           onValueChange={this.selectSecond}
           >  
           <Picker.Item label="Selecciona la respuesta" value="" />
-          <Picker.Item label="si" value="si" />
-          <Picker.Item label="no" value="no" />
+          <Picker.Item label="Si" value="si" />
+          <Picker.Item label="No" value="no" />
           </Picker>
           </View>
 
@@ -128,8 +137,8 @@ class Conoce extends React.Component {
           onValueChange={this.selectThird}
           >  
           <Picker.Item label="Selecciona la respuesta" value="" />
-          <Picker.Item label="si" value="si" />
-          <Picker.Item label="no" value="no" />
+          <Picker.Item label="Si" value="si" />
+          <Picker.Item label="No" value="no" />
           </Picker>
           </View>
 
@@ -163,12 +172,18 @@ class Conoce extends React.Component {
           </View>
         
 
-            <Text
+        <TouchableOpacity 
+        onPress={() => this.setState({ Response: "Posible abuso de autoridad: Es una situación donde la autoridad o individuo debido a su posición, utiliza el poder para su beneficio" }) }
+        style={styles.analyzeButton}>
+        <Text style={{color: "#FFF", fontWeight:"bold", fontSize: 16}}> Analiza tu caso </Text>
+        </TouchableOpacity>
+           
+            <TouchableOpacity
             style={styles.Resultado}
             >
-           
-              <Text style={styles.texto}> Buscar denuncias</Text>
-              </Text>
+              <Text style={styles.analyzedText}
+              > {this.state.Response} </Text>
+              </TouchableOpacity>
 
         </ScrollView>
       );
@@ -180,6 +195,27 @@ class Conoce extends React.Component {
 const window = Dimensions.get("window");
 
 const styles = StyleSheet.create({
+    analyzeButton:{
+        alignItems: 'center',
+        alignSelf: 'center',
+        justifyContent: 'center',
+        width: window.width * .7,
+        height:window.width * .2,
+        marginTop: 15,
+        borderRadius: 80,
+        backgroundColor: "#425d8b"
+    },
+
+    analyzedText:{
+        marginTop: 20,
+        borderColor: 'black', 
+        borderWidth: 0,
+        height: window.height * .2,
+        alignSelf:'center',
+        justifyContent:'center',
+        width: window.width * .7,
+        color: "#000"
+    },
   pickers_container:{
     justifyContent:'center',
     marginTop: window.height * .1
@@ -192,8 +228,8 @@ const styles = StyleSheet.create({
   },
 
   Resultado:{
-    width: window.width * .7,
-    height: window.width * .2,
+    width: window.width * .75,
+    height: window.width * .3,
     marginTop:20,
     justifyContent:'center',
     alignSelf: 'center',
@@ -206,7 +242,6 @@ const styles = StyleSheet.create({
   texto:{
     alignSelf: 'center',
     color:'#000',
-    fontWeight:'bold',
     fontSize:18
   }
     });

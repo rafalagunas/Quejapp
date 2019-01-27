@@ -4,7 +4,7 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Platform,
   StyleSheet,
@@ -14,118 +14,114 @@ import {
   TouchableOpacity,
   View,
   Dimensions
-} from 'react-native';
-import { StackNavigator } from 'react-navigation';
+} from "react-native";
+import { StackNavigator } from "react-navigation";
 
-import VerDenuncias from './components/VerDenuncias';
-import DenunciarQueja from './components/DenunciarQueja';
+import VerDenuncias from "./components/VerDenuncias";
+import DenunciarQueja from "./components/DenunciarQueja";
 
 class Main extends Component {
-    static navigationOptions = {
-        header: null 
-      };
+  static navigationOptions = {
+    header: null
+  };
 
-      render() {
-      const { navigate } = this.props.navigation;
+  render() {
+    const { navigate } = this.props.navigation;
 
-      return (
+    return (
       <View style={styles.container}>
-
-      <Image
-        style={styles.logo}
-        source={require('./images/quejapp.png')}
-      />
+        <Image style={styles.logo} source={require("./images/quejapp.png")} />
 
         <View style={styles.title}>
-             <Text style={styles.titleText}>{"\n"} Alza la voz con esta aplicación. {"\n"} Publica quejas y denuncias por dependencia gubernamental  {"\n"} ¡Acabemos con la corrupción!</Text>
+          <Text style={styles.titleText}>
+            {"\n"} Alza la voz con esta aplicación. {"\n"} Publica quejas y
+            denuncias por dependencia gubernamental {"\n"} ¡Acabemos con la
+            corrupción!
+          </Text>
         </View>
-        
-         <TouchableOpacity
-          onPress={() => navigate('Generales')}
+
+        <TouchableOpacity
+          onPress={() => navigate("Generales")}
           style={styles.generales}
-         >
-            <Text style={styles.buttonText}>Ver todas las denuncias</Text>
-        </TouchableOpacity>
-
-        
-        <TouchableOpacity
-          onPress={() => navigate('Buscar')}
-          style={styles.denunciar}
-         >
-            <Text style={styles.buttonText}>Encuentra denuncias</Text>
-        </TouchableOpacity>
-      
-        
-        <TouchableOpacity
-          onPress={() => navigate('Denunciar')}
-          style={styles.denunciar}
-         >
-            <Text style={styles.buttonText}>Haz una denuncia</Text>
+        >
+          <Text style={styles.buttonText}>Ver todas las denuncias</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-        onPress={() => navigate('Conoce')}
+          onPress={() => navigate("Buscar")}
           style={styles.denunciar}
-         >
-            <Text style={styles.buttonText}>Conoce la corrupción</Text>
+        >
+          <Text style={styles.buttonText}>Encuentra denuncias</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => navigate("Denunciar")}
+          style={styles.denunciar}
+        >
+          <Text style={styles.buttonText}>Haz una denuncia</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => navigate("Conoce")}
+          style={styles.denunciar}
+        >
+          <Text style={styles.buttonText}>Conoce la corrupción</Text>
         </TouchableOpacity>
       </View>
     );
-      }
-    }
+  }
+}
 
-    const window = Dimensions.get('window');
-
+const window = Dimensions.get("window");
 
 export default Main;
-  
 
 const styles = StyleSheet.create({
   container: {
     width: window.width * 1,
     height: window.height * 1,
-    alignItems: 'center',
-    backgroundColor: '#FFF',
+    alignItems: "center",
+    backgroundColor: "#FFF"
   },
-buttonText:{
-color:'#FFF',
-fontWeight:'bold',
-fontSize:18
-},
-  logo:{
-    marginTop:20,
-    height:90,
-    width:150,
+  buttonText: {
+    color: "#FFF",
+    fontWeight: "bold",
+    fontSize: 18
   },
-  title:{
-    alignSelf:'center',
-    justifyContent:'center',
+  logo: {
+    marginTop: 20,
+    height: 90,
+    width: 150
+  },
+  title: {
+    alignSelf: "center",
+    justifyContent: "center",
     width: 300,
-    marginLeft:40,
-    color:'#000',
-    height: 100,
+    marginLeft: 40,
+    color: "#000",
+    paddingBottom: 20
   },
-  titleText:{
+  titleText: {
     fontSize: 18,
-    fontWeight: 'bold',
-    alignSelf:'center'
+    fontWeight: "bold",
+    alignSelf: "center"
   },
   generales: {
-    alignItems: 'center',
-    alignSelf: 'center',
-    justifyContent: 'center',
-    width: window.width * .7,
-    height:window.width * .2,
+    alignItems: "center",
+    alignSelf: "center",
+    justifyContent: "center",
+    width: window.width * 0.7,
+    height: window.width * 0.2,
     marginTop: 15,
     borderRadius: 80,
     backgroundColor: "#425d8b"
   },
   denunciar: {
-    alignItems: 'center',
-    alignSelf: 'center',
-    justifyContent: 'center',
-    width: window.width * .7,
-    height:window.width * .2,
+    alignItems: "center",
+    alignSelf: "center",
+    justifyContent: "center",
+    width: window.width * 0.7,
+    height: window.width * 0.2,
     marginTop: 10,
     borderRadius: 80,
     backgroundColor: "#425d8b"
