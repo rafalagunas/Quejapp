@@ -10,8 +10,6 @@ import {
   ActivityIndicator
 } from "react-native";
 import { StackNavigator } from "react-navigation";
-import App from "../index";
-
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { search_response } from "../Actions/Search";
@@ -27,47 +25,50 @@ class ResultadoBusqueda extends Component {
       isLoading: true,
       data: ""
     };
+    this.fillData = this.fillData.bind(this);
   }
 
   GetItem(queja_queja) {
     Alert.alert("", queja_queja);
   }
-
-  componentDidMount() {
-    console.log(this.props);
-
-    if (this.props.data != null && this.props.data != undefined) {
-      let ds = new ListView.DataSource({
-        rowHasChanged: (r1, r2) => r1 !== r2
-      });
-      this.setState(
-        {
-          isLoading: false,
-          dataSource: ds.cloneWithRows(this.props.data)
-        },
-        function() {}
-      );
-    }
-  }
-
-  /*
-
-componentDidMount() {
-  return fetch('http://quejapp.warecrafty.com/data')
-    .then((response) => response.json())
-    .then((responseJson) => {
-      let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-      this.setState({
-        isLoading: false,
-        dataSource: ds.cloneWithRows(responseJson),
-      }, function() {
-      });
-    })
-    .catch((error) => {
-      console.error(error);
+  fillData = datos => {
+    this.props.fillData(datos);
+  };
+  setStateAsync(state) {
+    return new Promise(resolve => {
+      this.setState(state, resolve);
     });
-}
-*/
+  }
+  componentDidMount() {
+    return fetch(
+      "http://coderscave.tech/quejapp/api/v1/state/complaints?estado_id=" +
+        parseInt(this.props.data)
+    )
+      .then(response => response.json())
+      .then(responseJson => {
+        if (responseJson == "") {
+          Alert.alert("", "No ha habido resultados");
+          const { navigate } = this.props.navigation;
+          const empty = "";
+          this.fillData(empty);
+          navigate("Buscar");
+        } else {
+          let ds = new ListView.DataSource({
+            rowHasChanged: (r1, r2) => r1 !== r2
+          });
+          this.setState(
+            {
+              isLoading: false,
+              dataSource: ds.cloneWithRows(responseJson)
+            },
+            function() {}
+          );
+        }
+      })
+      .catch(error => {
+        alert(error);
+      });
+  }
 
   ListViewItemSeparator = () => {
     return (
@@ -97,40 +98,21 @@ componentDidMount() {
           renderSeparator={this.ListViewItemSeparator}
           renderRow={rowData => (
             <View style={{ flex: 1, flexDirection: "column" }}>
-              <TouchableOpacity
-                style={styles.contenedor_queja}
-                onPress={this.GetItem.bind(this, rowData.queja_queja)}
-              >
+              <TouchableOpacity style={styles.contenedor_queja}>
                 <Text style={styles.textViewContainer}>
-                  {"Estado: " + rowData.queja_estado}
+                  {"Ciudad: " + rowData.city}
                 </Text>
 
                 <Text style={styles.textViewContainer}>
-                  {"Ciudad: " + rowData.queja_ciudad}
+                  {"Dependencia: " + rowData.dependency}
                 </Text>
 
                 <Text style={styles.textViewContainer}>
-                  {"Dependencia: " + rowData.queja_dependencia}
-                </Text>
-
-                <Text style={styles.textViewContainer}>
-                  {"Area de dependencia: " + rowData.queja_area}
-                </Text>
-
-                <Text style={styles.textViewContainer}>
-                  {"Fecha: " + rowData.queja_fecha}
-                </Text>
-
-                <Text style={styles.textViewContainer}>
-                  {"Nombre: " + rowData.queja_nombre}
-                </Text>
-
-                <Text style={styles.textViewContainer}>
-                  {"Contacto: " + rowData.queja_contacto}
+                  {"Area de dependencia: " + rowData.dependency_area}
                 </Text>
 
                 <Text style={styles.textViewContainer_queja}>
-                  {"Queja: " + rowData.queja_queja}
+                  {"Queja: " + rowData.complaint}
                 </Text>
               </TouchableOpacity>
             </View>
@@ -140,6 +122,20 @@ componentDidMount() {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fillData: data => {
+      dispatch(search_response(data));
+    }
+  };
+};
+
+const mapStateToProps = state => {
+  return {
+    data: state.busqueda.data
+  };
+};
 
 const styles = StyleSheet.create({
   contenedor_queja: {
@@ -175,5 +171,4 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   }
 });
-
-export default ResultadoBusqueda;
+export default connect(mapStateToProps)(ResultadoBusqueda);

@@ -12,7 +12,10 @@ import {
   TextInput
 } from "react-native";
 import { StackNavigator } from "react-navigation";
-
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { search_response } from "../Actions/Search";
+import reducer from "../reducers/BusquedaReducer";
 class BuscarDenuncias extends React.Component {
   static navigationOptions = {
     title: "Encuentra denuncias",
@@ -48,6 +51,10 @@ class BuscarDenuncias extends React.Component {
       this.setState(state, resolve);
     });
   }
+  componentDidMount() {
+    const empty = "";
+    this.fillData(empty);
+  }
 
   Send(e) {
     let details = {
@@ -56,18 +63,9 @@ class BuscarDenuncias extends React.Component {
       queja_dependencia: this.state.Dependencia
     };
 
-    fetch(
-      "http://coderscave.tech/api/state/complaints?estado_id=" +
-        parseInt(details.queja_estado),
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json"
-        }
-      }
-    ).then(response => alert(JSON.stringify(response)));
-    // .then(responseJson =>this.setState({ data: responseJson });
-    //.then(data => { if(data != '' && data != undefined & data != null){this.fillData(data)}})
+    if (details.queja_estado != "") {
+      this.setState({ data: details.queja_estado });
+    }
   }
 
   render() {
@@ -77,7 +75,6 @@ class BuscarDenuncias extends React.Component {
       this.fillData(this.state.data);
       navigate("Resultado");
     }
-
     return (
       <ScrollView style={{ backgroundColor: "#FFF" }}>
         <View style={styles.pickers_container}>
@@ -172,6 +169,20 @@ class BuscarDenuncias extends React.Component {
     );
   }
 }
+const mapDispatchToProps = dispatch => {
+  return {
+    fillData: data => {
+      dispatch(search_response(data));
+    }
+  };
+};
+
+const mapStateToProps = state => {
+  //console.log(state)
+  return {
+    data: state.data
+  };
+};
 
 const window = Dimensions.get("window");
 
@@ -207,4 +218,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default BuscarDenuncias;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BuscarDenuncias);

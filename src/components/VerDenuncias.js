@@ -35,7 +35,7 @@ class VerDenuncias extends Component {
 FUNCIÓN PARA LLAMAR LOS DATOS DIRECTAMENTE A TRAVÉS DE LA API PÚBLICA
  */
   componentDidMount() {
-    return fetch("http://coderscave.tech/api/v1/complaints")
+    return fetch("http://coderscave.tech/quejapp/api/v1/complaints")
       .then(response => response.json())
       .then(responseJson => {
         let ds = new ListView.DataSource({

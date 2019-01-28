@@ -70,7 +70,7 @@ class DenunciarQueja extends React.Component {
 
   Send = details => {
     fetch(
-      "http://coderscave.tech/api/v1/complaints?queja_estado=" +
+      "http://coderscave.tech/quejapp/api/v1/complaints?queja_estado=" +
         parseInt(details.queja_estado) +
         "&" +
         "queja_ciudad=" +
