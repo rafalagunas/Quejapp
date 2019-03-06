@@ -30,7 +30,8 @@ class DenunciarQueja extends React.Component {
       Nombre: "",
       Contacto: "",
       Queja: "",
-      key: ""
+      key: "",
+      status: ""
     };
   }
 
@@ -43,17 +44,7 @@ class DenunciarQueja extends React.Component {
   };
 
   VerifyData = () => {
-    const details = {
-      queja_estado: this.state.Estado,
-      queja_ciudad: this.state.Ciudad,
-      queja_dependencia: this.state.Dependencia,
-      queja_area: this.state.Area_dependencia,
-      queja_nombre: this.state.Nombre,
-      queja_contacto: this.state.Contacto,
-      queja_queja: this.state.Queja
-    };
-
-    this.Send(details);
+    //   this.Send(details);
     /*
     if (
       details.queja_estado == "" ||
@@ -68,41 +59,41 @@ class DenunciarQueja extends React.Component {
     */
   };
 
-  Send = details => {
-    fetch(
-      "http://coderscave.tech/quejapp/api/v1/complaints?queja_estado=" +
-        parseInt(details.queja_estado) +
-        "&" +
-        "queja_ciudad=" +
-        details.queja_ciudad +
-        "&" +
-        "queja_dependencia=" +
-        parseInt(details.queja_dependencia) +
-        "&" +
-        "queja_queja=" +
-        details.queja_queja +
-        "&" +
-        "queja_area=" +
-        details.queja_area +
-        "&" +
-        "queja_nombre=" +
-        details.queja_nombre +
-        "&" +
-        "queja_contacto=" +
-        details.queja_contacto,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        }
+  Send = () => {
+    const details = {
+      queja_estado: this.state.Estado,
+      queja_ciudad: this.state.Ciudad,
+      queja_dependencia: this.state.Dependencia,
+      queja_area: this.state.Area_dependencia,
+      queja_nombre: this.state.Nombre,
+      queja_contacto: this.state.Contacto,
+      queja_queja: this.state.Queja
+    };
+
+    fetch("http://coderscave.tech/quejapp/api/v1/complaints", {
+      method: "POST",
+      body: JSON.stringify({
+        queja_estado: parseInt(details.queja_estado),
+        queja_ciudad: details.queja_ciudad,
+        queja_dependencia: parseInt(details.queja_dependencia),
+        queja_area: details.queja_area,
+        queja_nombre: details.queja_nombre,
+        queja_contacto: details.queja_contacto,
+        queja_queja: details.queja_queja
+      }),
+      headers: {
+        "Content-Type": "application/json"
       }
-    ).then(response => {
+    }).then(response => {
+      const { navigate } = this.props.navigation;
+
       if (response.status == 200) {
-        navigate("Home");
+        alert("Tu queja fue enviada");
+        this.setState({ status: response.status });
       } else {
         Alert.alert(
-          "",
-          JSON.stringify(response)
+          "CAMPOS REQUERIDOS",
+          "ESTADO, CIUDAD, DEPENDENCIA Y QUEJA"
           // "Algo salió mal, verifica tu conexión a internet o los campos ingresados"
         );
       }
@@ -111,7 +102,9 @@ class DenunciarQueja extends React.Component {
 
   render() {
     const { navigate } = this.props.navigation;
-
+    if (this.state.status == 200) {
+      navigate("Home");
+    }
     return (
       <ScrollView style={styles.container}>
         <View style={styles.picker}>
@@ -129,29 +122,28 @@ class DenunciarQueja extends React.Component {
             <Picker.Item label="Chihuahua" value="7" />
             <Picker.Item label="Coahuila" value="8" />
             <Picker.Item label="Colima" value="9" />
-            <Picker.Item label="Ciudad de México" value="10" />
-            <Picker.Item label="Durango" value="11" />
-            <Picker.Item label="Guanajuato" value="12" />
-            <Picker.Item label="Guerrero" value="13" />
-            <Picker.Item label="Hidalgo" value="14" />
-            <Picker.Item label="Jalisco" value="15" />
-            <Picker.Item label="Michoacán" value="16" />
-            <Picker.Item label="Morelos" value="17" />
-            <Picker.Item label="Nayarit" value="18" />
-            <Picker.Item label="Nuevo León" value="19" />
-            <Picker.Item label="Oaxaca" value="20" />
-            <Picker.Item label="Puebla" value="21" />
-            <Picker.Item label="Querétaro" value="22" />
-            <Picker.Item label="Quintana Roo" value="23" />
-            <Picker.Item label="San Luis Potosí" value="24" />
-            <Picker.Item label="Sinaloa" value="25" />
-            <Picker.Item label="Sonora" value="26" />
-            <Picker.Item label="Tabasco" value="27" />
-            <Picker.Item label="Tamaulipas" value="28" />
-            <Picker.Item label="Tlaxcala" value="29" />
-            <Picker.Item label="Veracruz" value="30" />
-            <Picker.Item label="Yucatán" value="31" />
-            <Picker.Item label="Zacatecas" value="32" />
+            <Picker.Item label="Durango" value="10" />
+            <Picker.Item label="Guanajuato" value="11" />
+            <Picker.Item label="Guerrero" value="12" />
+            <Picker.Item label="Hidalgo" value="13" />
+            <Picker.Item label="Jalisco" value="14" />
+            <Picker.Item label="Michoacán" value="15" />
+            <Picker.Item label="Morelos" value="16" />
+            <Picker.Item label="Nayarit" value="17" />
+            <Picker.Item label="Nuevo León" value="18" />
+            <Picker.Item label="Oaxaca" value="19" />
+            <Picker.Item label="Puebla" value="20" />
+            <Picker.Item label="Querétaro" value="21" />
+            <Picker.Item label="Quintana Roo" value="22" />
+            <Picker.Item label="San Luis Potosí" value="23" />
+            <Picker.Item label="Sinaloa" value="24" />
+            <Picker.Item label="Sonora" value="25" />
+            <Picker.Item label="Tabasco" value="26" />
+            <Picker.Item label="Tamaulipas" value="27" />
+            <Picker.Item label="Tlaxcala" value="28" />
+            <Picker.Item label="Veracruz" value="29" />
+            <Picker.Item label="Yucatán" value="30" />
+            <Picker.Item label="Zacatecas" value="31" />
           </Picker>
         </View>
 
@@ -224,10 +216,7 @@ class DenunciarQueja extends React.Component {
           placeholder="Redacta tu denuncia indicando(en caso de conocer) el nombre del servidor público, el lugar de los hechos y detalles importantes que ayuden a dar seguimiento a tu denuncia."
         />
 
-        <TouchableOpacity
-          style={styles.botonQueja}
-          onPress={() => this.VerifyData()}
-        >
+        <TouchableOpacity style={styles.botonQueja} onPress={() => this.Send()}>
           <Text style={styles.texto}> Publicar queja</Text>
         </TouchableOpacity>
       </ScrollView>

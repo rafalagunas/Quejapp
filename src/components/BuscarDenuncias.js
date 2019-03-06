@@ -70,7 +70,6 @@ class BuscarDenuncias extends React.Component {
 
   render() {
     const { navigate } = this.props.navigation;
-
     if (this.state.data != "") {
       this.fillData(this.state.data);
       navigate("Resultado");
@@ -93,33 +92,60 @@ class BuscarDenuncias extends React.Component {
               <Picker.Item label="Chihuahua" value="7" />
               <Picker.Item label="Coahuila" value="8" />
               <Picker.Item label="Colima" value="9" />
-              <Picker.Item label="Ciudad de México" value="10" />
-              <Picker.Item label="Durango" value="11" />
-              <Picker.Item label="Guanajuato" value="12" />
-              <Picker.Item label="Guerrero" value="13" />
-              <Picker.Item label="Hidalgo" value="14" />
-              <Picker.Item label="Jalisco" value="15" />
-              <Picker.Item label="Michoacán" value="16" />
-              <Picker.Item label="Morelos" value="17" />
-              <Picker.Item label="Nayarit" value="18" />
-              <Picker.Item label="Nuevo León" value="19" />
-              <Picker.Item label="Oaxaca" value="20" />
-              <Picker.Item label="Puebla" value="21" />
-              <Picker.Item label="Querétaro" value="22" />
-              <Picker.Item label="Quintana Roo" value="23" />
-              <Picker.Item label="San Luis Potosí" value="24" />
-              <Picker.Item label="Sinaloa" value="25" />
-              <Picker.Item label="Sonora" value="26" />
-              <Picker.Item label="Tabasco" value="27" />
-              <Picker.Item label="Tamaulipas" value="28" />
-              <Picker.Item label="Tlaxcala" value="29" />
-              <Picker.Item label="Veracruz" value="30" />
-              <Picker.Item label="Yucatán" value="31" />
-              <Picker.Item label="Zacatecas" value="32" />
+
+              <Picker.Item label="Durango" value="10" />
+              <Picker.Item label="Guanajuato" value="11" />
+              <Picker.Item label="Guerrero" value="12" />
+              <Picker.Item label="Hidalgo" value="13" />
+              <Picker.Item label="Jalisco" value="14" />
+              <Picker.Item label="Michoacán" value="15" />
+              <Picker.Item label="Morelos" value="16" />
+              <Picker.Item label="Nayarit" value="17" />
+              <Picker.Item label="Nuevo León" value="18" />
+              <Picker.Item label="Oaxaca" value="19" />
+              <Picker.Item label="Puebla" value="20" />
+              <Picker.Item label="Querétaro" value="21" />
+              <Picker.Item label="Quintana Roo" value="22" />
+              <Picker.Item label="San Luis Potosí" value="23" />
+              <Picker.Item label="Sinaloa" value="24" />
+              <Picker.Item label="Sonora" value="25" />
+              <Picker.Item label="Tabasco" value="26" />
+              <Picker.Item label="Tamaulipas" value="27" />
+              <Picker.Item label="Tlaxcala" value="28" />
+              <Picker.Item label="Veracruz" value="29" />
+              <Picker.Item label="Yucatán" value="30" />
+              <Picker.Item label="Zacatecas" value="31" />
             </Picker>
           </View>
+        </View>
 
-          <View style={styles.picker}>
+        <TouchableOpacity
+          style={styles.botonBuscar}
+          onPress={e => this.Send(e)}
+        >
+          <Text style={styles.texto}> Buscar denuncias</Text>
+        </TouchableOpacity>
+      </ScrollView>
+    );
+  }
+}
+const mapDispatchToProps = dispatch => {
+  return {
+    fillData: data => {
+      dispatch(search_response(data));
+    }
+  };
+};
+
+const mapStateToProps = state => {
+  //console.log(state)
+  return {
+    data: state.data
+  };
+};
+
+/*
+  <View style={styles.picker}>
             <Picker
               selectedValue={this.state.Dependencia}
               onValueChange={this.SelectDependence}
@@ -157,32 +183,7 @@ class BuscarDenuncias extends React.Component {
               />
             </Picker>
           </View>
-        </View>
-
-        <TouchableOpacity
-          style={styles.botonBuscar}
-          onPress={e => this.Send(e)}
-        >
-          <Text style={styles.texto}> Buscar denuncias</Text>
-        </TouchableOpacity>
-      </ScrollView>
-    );
-  }
-}
-const mapDispatchToProps = dispatch => {
-  return {
-    fillData: data => {
-      dispatch(search_response(data));
-    }
-  };
-};
-
-const mapStateToProps = state => {
-  //console.log(state)
-  return {
-    data: state.data
-  };
-};
+          */
 
 const window = Dimensions.get("window");
 

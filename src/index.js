@@ -56,23 +56,20 @@ class Main extends Component {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => navigate("Conoce")}
+          onPress={() => navigate("Glosario")}
           style={styles.denunciar}
         >
           <Text style={styles.buttonText}>Conoce la corrupción</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() => navigate("Analiza")}
-          style={styles.denunciar}
-        >
-          <Text style={styles.buttonText}>Analiza tu caso</Text>
         </TouchableOpacity>
       </View>
     );
   }
 }
-
+/*
+<TouchableOpacity onPress={() => navigate("Analiza")} style={styles.denunciar}>
+  <Text style={styles.buttonText}>Analiza tu caso</Text>
+</TouchableOpacity>;
+*/
 const window = Dimensions.get("window");
 
 export default Main;
